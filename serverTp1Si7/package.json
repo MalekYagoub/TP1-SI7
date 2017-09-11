@@ -1,0 +1,12 @@
+{
+  "name": "serverTp1Si7",
+  "version": "0.0.0",
+  "description": "Serveur récupérant les flux RSS des journaux",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "cors": "^2.8.4",
+    "express": "*",
+    "feed-read": "*"
+  }
+}
