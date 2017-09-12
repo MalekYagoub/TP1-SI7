@@ -14,6 +14,7 @@
 		        'brown lighten-1': selected === 4,
 		        'grey darken-4': selected === 5,
 		      }"
+		      class="indigo"
 		    >
 		        <v-btn dark @click.native="setactiveTypeActus('economie')">
 		        	<span>Economie</span>

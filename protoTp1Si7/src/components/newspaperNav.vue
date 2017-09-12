@@ -1,6 +1,6 @@
 <template>
 	<v-bottom-nav absolute :value="true" :active="activeNewspaper" class="transparent">
-		<v-btn v-for="newspaperInfos in newspapersInfos" flat class="teal--text" :value="newspaperInfos.value" 
+		<v-btn v-for="newspaperInfos in newspapersInfos" :key="newspaperInfos.name" flat class="indigo--text" :value="newspaperInfos.value" 
 		@click.native="setActiveNewspaper(newspaperInfos.value)">
 			<span>{{newspaperInfos.name}}</span>
 		</v-btn>

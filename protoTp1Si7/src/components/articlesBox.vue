@@ -1,13 +1,13 @@
 <template>
 	<v-flex xs9>
 		<v-card height="700px" class="articleBoxScroll">
-			<v-layout v-for="article in articles" mt-2 v-if="articles">
+			<v-layout v-for="article in articles" :key="article.published" mt-2 v-if="articles">
 			    <v-flex xs12 ml-2 mr-2>
 			      <v-card>
 					<v-card-title class="text-xs-center">
 						<div class="centerTitle">
 							<p class="display-1">{{article.title}}</p>
-							<p class="blue--text">{{getDate(article.published)}}</p>
+							<p class="indigo--text">{{getDate(article.published)}}</p>
 						</div>
 					</v-card-title>
 					<v-card-text class="text-xs-center" v-html="article.content">
