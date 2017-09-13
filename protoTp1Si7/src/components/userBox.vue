@@ -1,11 +1,7 @@
 <template>
 	<v-flex xs3>
-		<v-snackbar
-		:timeout = "3000"
-		top = "top"
-		v-model="test">
-		</v-snackbar>
 		<app-alert  v-if="error" v-on:dismissed="onDismissed" :code="error.code"></app-alert>
+		<app-info  v-if="userSignedUp" v-on:dismissed="onDismissed" :info="'Compte crée avec succès !'"></app-info>
 		<v-card v-if="signUpOrSignIn === 0 && user === undefined && user == null">
 			<v-card-text class="px-0 headline"> <!-- SIGN IN -->
 				Connexion
@@ -38,16 +34,16 @@
 
 					<v-layout>
 						<v-flex xs6>
-							<v-btn class="red accent-2" type="submit" large :disabled="loading" :loading="loading">
+							<v-btn class="primary" type="submit" large :disabled="loading" :loading="loading">
 								Connexion
 							</v-btn>
 						</v-flex>
-						<v-flex xs6><v-btn class="red accent-2" large @click="clear">Effacer</v-btn></v-flex>
+						<v-flex xs6><v-btn class="primary" large @click="clear">Effacer</v-btn></v-flex>
 					</v-layout row wrap>
 				</form>
 
 				<p class="mt-3 title">Pas encore de compte, 
-					<span class="blue--text link" @click="showSignUpForm">
+					<span class="secondary--text link" @click="showSignUpForm">
 						inscrivez vous !
 					</span>
 				</p>
@@ -102,17 +98,17 @@
 				
 					<v-layout>
 						<v-flex xs6>
-							<v-btn class="red accent-2" type="submit" large :disabled="loading" :loading="loading">
+							<v-btn class="primary" type="submit" large :disabled="loading" :loading="loading">
 								S'inscrire
 							</v-btn>
 						</v-flex>
-						<v-flex xs6><v-btn class="red accent-2" large @click="clear">Effacer</v-btn></v-flex>
+						<v-flex xs6><v-btn class="primary" large @click="clear">Effacer</v-btn></v-flex>
 					</v-layout row wrap>
 				</form>
 
 				<v-card-actions class="white">
 	                <v-btn icon @click="showSignInForm">
-	                  <v-icon class="indigo--text">keyboard_arrow_left</v-icon>
+	                  <v-icon class="secondary--text">keyboard_arrow_left</v-icon>
 	                </v-btn>
                	</v-card-actions>
 			</v-card-text>
@@ -128,11 +124,10 @@
 				</v-container>
 			</v-card-text>
 			<v-layout>
-				<v-flex xs6><v-btn class="red accent-2" large @click="clear">Mes articles</v-btn></v-flex>
-				<v-flex xs6><v-btn class="red accent-2" type="submit" large @click="logout">Déconnexion</v-btn></v-flex>
+				<v-flex xs6><v-btn class="primary" large @click="clear">Mes articles</v-btn></v-flex>
+				<v-flex xs6><v-btn class="primary" type="submit" large @click="logout">Déconnexion</v-btn></v-flex>
 			</v-layout row wrap>
 		</v-card>
-
 	</v-flex>
 </template>
 
@@ -146,14 +141,17 @@
 				signUpOrSignIn: 0,
 				email: '',
 				password: '',
-				confirmPassword: '',
-				alert: true,
-				test: true
+				confirmPassword: ''
 			}
 		},
 		methods: {
+			goSnack () {
+				this.snackbar = true;
+				console.log(this.snackbar);
+			},
 			onDismissed () {
 				this.$store.commit('error', null);
+				this.$store.commit('userSignedUp', false);
 			},
 			clear () {
 				this.email = '';
@@ -197,10 +195,12 @@
 		watch: {
 			userSignedUp (value) {
 				if (this.userSignedUp === true) {
-					this.$store.commit('userSignedUp', false);
 					this.signUpOrSignIn = 0;
 					this.email = "";
 					this.password = "";
+					setTimeout(() => {
+						this.$store.commit('userSignedUp', false);
+					}, 3000);
 				}
 			}
 		}

@@ -4,12 +4,14 @@ import App from './App'
 import * as firebase from 'firebase'
 import router from './router'
 import store from './store'
-import alert from './components/alert'
+import alert from './components/shared/alert'
+import info from './components/shared/info'
 
 Vue.use(Vuetify)
 Vue.config.productionTip = false
 
 Vue.component('app-alert', alert);
+Vue.component('app-info', info);
 
 /* eslint-disable no-new */
 new Vue({

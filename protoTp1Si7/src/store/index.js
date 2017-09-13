@@ -13,15 +13,18 @@ export default new Vuex.Store({
 		user: undefined,
 		error: null,
 		userSignedUp: false,
-		loading: false
+		loading: false,
+		loadingArticles: false
 	},
 	actions: {
 		getArticles: ({state, commit}, payload) => {
+			commit('loadingArticles', true);
 			axios.get('http://localhost:3000/getArticles/' + payload).then((response) => {
 				response.data.sort((a, b) => {
 					return new Date(Date.parse(b.published)) - new Date(Date.parse(a.published));
 				});
 				commit('articles', response.data);
+				commit('loadingArticles', false);
 			});
 		},
 		signUserUp: ({commit}, payload) => {
@@ -86,6 +89,9 @@ export default new Vuex.Store({
 		},
 		loading: (state, payload) => {
 			state.loading = payload;
+		},
+		loadingArticles: (state, payload) => {
+			state.loadingArticles = payload;
 		}
 
 	},
@@ -96,6 +102,7 @@ export default new Vuex.Store({
 		user: state => state.user,
 		error: state => state.error,
 		userSignedUp: state => state.userSignedUp,
-		loading: state => state.loading
+		loading: state => state.loading,
+		loadingArticles: state => state.loadingArticles
 	}
 });
