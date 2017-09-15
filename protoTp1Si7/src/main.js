@@ -26,6 +26,11 @@ new Vue({
 	    databaseURL: "https://tp1si7-7a3c6.firebaseio.com",
 	    projectId: "tp1si7-7a3c6",
 	    storageBucket: "tp1si7-7a3c6.appspot.com"
-	})
+	  })
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.commit('user', {id: user.uid, email: user.email, registeredArticles: []})
+      }
+    });
   }
 })

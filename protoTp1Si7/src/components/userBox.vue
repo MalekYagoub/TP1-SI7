@@ -34,11 +34,11 @@
 
 					<v-layout>
 						<v-flex xs6>
-							<v-btn class="primary" type="submit" large :disabled="loading" :loading="loading">
+							<v-btn class="primary black--text" type="submit" large :disabled="loading" :loading="loading">
 								Connexion
 							</v-btn>
 						</v-flex>
-						<v-flex xs6><v-btn class="primary" large @click="clear">Effacer</v-btn></v-flex>
+						<v-flex xs6><v-btn class="primary black--text" large @click="clear">Effacer</v-btn></v-flex>
 					</v-layout row wrap>
 				</form>
 
@@ -98,11 +98,11 @@
 				
 					<v-layout>
 						<v-flex xs6>
-							<v-btn class="primary" type="submit" large :disabled="loading" :loading="loading">
+							<v-btn class="primary black--text" type="submit" large :disabled="loading" :loading="loading">
 								S'inscrire
 							</v-btn>
 						</v-flex>
-						<v-flex xs6><v-btn class="primary" large @click="clear">Effacer</v-btn></v-flex>
+						<v-flex xs6><v-btn class="primary black--text" large @click="clear">Effacer</v-btn></v-flex>
 					</v-layout row wrap>
 				</form>
 
@@ -124,8 +124,8 @@
 				</v-container>
 			</v-card-text>
 			<v-layout>
-				<v-flex xs6><v-btn class="primary" large @click="clear">Mes articles</v-btn></v-flex>
-				<v-flex xs6><v-btn class="primary" type="submit" large @click="logout">Déconnexion</v-btn></v-flex>
+				<v-flex xs6><v-btn class="primary black--text" large @click="clear">Mes articles</v-btn></v-flex>
+				<v-flex xs6><v-btn class="primary black--text" type="submit" large @click="logout">Déconnexion</v-btn></v-flex>
 			</v-layout row wrap>
 		</v-card>
 	</v-flex>
@@ -176,9 +176,9 @@
 				this.confirmPassword = "";
 			},
 			logout () {
-				this.$store.commit('user', undefined);
 				this.email = "";
 				this.password = "";
+				this.$store.dispatch('logout');
 			}
 		},
 		computed : {

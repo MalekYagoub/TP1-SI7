@@ -66,6 +66,10 @@ export default new Vuex.Store({
 						commit('error', error);
 					}
 				)
+		},
+		logout ({commit}) {
+			firebase.auth().signOut();
+			commit('user', undefined);
 		}
 	},
 	mutations: {
