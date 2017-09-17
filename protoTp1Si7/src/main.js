@@ -29,7 +29,8 @@ new Vue({
 	  })
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.$store.commit('user', {id: user.uid, email: user.email, registeredArticles: []})
+        this.$store.commit('user', {id: user.uid, email: user.email, fbKeys: {}})
+        this.$store.dispatch('fetchUserData');
       }
     });
   }

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-toolbar class="primary">
-      <v-toolbar-title><!-- <img src="./assets/maPresse.png" class="logo"> --> Ma presse</v-toolbar-title>
+      <v-toolbar-title><img src="./assets/maPresse.png" class="logo"> <!--Ma presse --></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
       </v-toolbar-items>

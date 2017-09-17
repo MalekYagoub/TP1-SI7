@@ -14,14 +14,15 @@ export default new Vuex.Store({
 		error: null,
 		userSignedUp: false,
 		loading: false,
-		loadingArticles: false
+		loadingArticles: false,
+		showUserArticles: 0
 	},
 	actions: {
 		getArticles: ({state, commit}, payload) => {
 			commit('loadingArticles', true);
 			axios.get('http://localhost:3000/getArticles/' + payload).then((response) => {
 				response.data.sort((a, b) => {
-					return new Date(Date.parse(b.published)) - new Date(Date.parse(a.published));
+					return new Date(Date.parse(b.pubDate)) - new Date(Date.parse(a.pubDate));
 				});
 				commit('articles', response.data);
 				commit('loadingArticles', false);
@@ -44,7 +45,7 @@ export default new Vuex.Store({
 					}
 				)
 		},
-		signUserIn: ({commit}, payload) => {
+		signUserIn: ({commit, dispatch}, payload) => {
 			commit('error', null);
 			commit('loading', true);
 			firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
@@ -54,10 +55,12 @@ export default new Vuex.Store({
 						const userSignedIn = {
 							id: user.uid,
 							email: user.email,
-							registeredArticles: []
+							registeredArticles: [],
+							fbKeys: {}
 
 						}
 						commit('user', userSignedIn);
+						dispatch('fetchUserData');
 					}
 				)
 				.catch(
@@ -70,9 +73,92 @@ export default new Vuex.Store({
 		logout ({commit}) {
 			firebase.auth().signOut();
 			commit('user', undefined);
+			commit('showUserArticles', 0);
+		},
+		registerUserForArticle ({commit, state, getters}, payload) {
+			const user = getters.user;
+			const guid = payload.guid;
+			if (state.user.registeredArticles.findIndex(article => article.guid === guid) >= 0) {
+				return;
+			}
+			firebase.database().ref('/usersArticles/' + user.id).push(payload)
+				.then((data) => {
+					commit('registerUserForArticle', {...payload, fbKey: data.key});
+				})
+				.catch((error) => {
+					console.log(error);
+				})
+		},
+		unregisterUserFromArticle ({commit, getters}, payload) {
+			const user = getters.user;
+			const fbKey = user.fbKeys[payload.guid];
+			firebase.database().ref('/usersArticles/' + user.id).child(fbKey).remove()
+				.then (() => {
+					commit('unregisterUserFromArticle', payload.guid);
+				})
+				.catch((error) => {
+					console.log(error);
+				})
+		},
+		fetchUserData ({commit, getters}) {
+			firebase.database().ref('/usersArticles/' + getters.user.id).once('value')
+				.then(data => {
+					const obj = data.val();
+					const registeredArticles = [];
+					let swappedPairs = {};
+					for (let key in obj) {
+						swappedPairs[obj[key].guid] = key;
+						if (obj[key].image) {
+							registeredArticles.push({
+								id: key,
+								title: obj[key].title,
+								image: obj[key].image, 
+								link: obj[key].link,
+								pubDate: obj[key].pubDate,
+								summary: obj[key].summary,
+								guid: obj[key].guid
+							})
+						} else {
+							registeredArticles.push({
+								id: key,
+								title: obj[key].title,
+								link: obj[key].link,
+								pubDate: obj[key].pubDate,
+								summary: obj[key].summary
+							})
+						}	
+					}
+					const updatedUser = {
+						id: getters.user.id,
+						email: getters.user.email,
+						registeredArticles: registeredArticles,
+						fbKeys: swappedPairs
+
+					}
+					commit('user', updatedUser);
+				})
+				.catch(error => {
+					console.log(error);
+				})
 		}
 	},
 	mutations: {
+		registerUserForArticle: (state, payload) => {
+			const guid = payload.guid;
+			if (state.user.registeredArticles.findIndex(article => article.guid === guid) >= 0) {
+				return;
+			}
+			state.user.registeredArticles.push(payload);
+			state.user.fbKeys[guid] = payload.fbKey;
+		},
+		unregisterUserFromArticle: (state, guid) => {
+			const registeredArticles = state.user.registeredArticles;
+			registeredArticles.splice(registeredArticles.findIndex(article => article.guid === guid), 1);
+			Reflect.deleteProperty(state.user.fbKeys, guid);
+		},
+		setUserArticles: (state, payload) => {
+			state.user.registeredArticles = payload;
+		},
 		activeTypeActus: (state, payload) => {
 			state.activeTypeActus = payload;
 		},
@@ -96,6 +182,9 @@ export default new Vuex.Store({
 		},
 		loadingArticles: (state, payload) => {
 			state.loadingArticles = payload;
+		},
+		showUserArticles: (state, payload) => {
+			state.showUserArticles = payload;
 		}
 
 	},
@@ -107,6 +196,7 @@ export default new Vuex.Store({
 		error: state => state.error,
 		userSignedUp: state => state.userSignedUp,
 		loading: state => state.loading,
-		loadingArticles: state => state.loadingArticles
+		loadingArticles: state => state.loadingArticles,
+		showUserArticles: state => state.showUserArticles
 	}
 });

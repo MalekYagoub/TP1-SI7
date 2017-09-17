@@ -7,6 +7,9 @@
     "axios": "^0.16.2",
     "cors": "^2.8.4",
     "express": "*",
-    "feed-read": "*"
+    "feed-read": "*",
+    "feedparser": "^2.2.1",
+    "feedparser-promised": "^1.4.2",
+    "request": "^2.81.0"
   }
 }

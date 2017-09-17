@@ -124,7 +124,10 @@
 				</v-container>
 			</v-card-text>
 			<v-layout>
-				<v-flex xs6><v-btn class="primary black--text" large @click="clear">Mes articles</v-btn></v-flex>
+				<v-flex xs6>
+						<v-btn class="primary black--text" large v-if="showUserArticles === 0" @click.native="showUserArticlesCommit">Mes articles</v-btn>
+						<v-btn class="primary black--text" large v-else-if="showUserArticles === 1" @click.native="showAllArticles">Tout les articles</v-btn>
+				</v-flex>
 				<v-flex xs6><v-btn class="primary black--text" type="submit" large @click="logout">Déconnexion</v-btn></v-flex>
 			</v-layout row wrap>
 		</v-card>
@@ -145,10 +148,6 @@
 			}
 		},
 		methods: {
-			goSnack () {
-				this.snackbar = true;
-				console.log(this.snackbar);
-			},
 			onDismissed () {
 				this.$store.commit('error', null);
 				this.$store.commit('userSignedUp', false);
@@ -179,6 +178,12 @@
 				this.email = "";
 				this.password = "";
 				this.$store.dispatch('logout');
+			},
+			showUserArticlesCommit () {
+				this.$store.commit('showUserArticles', 1);
+			},
+			showAllArticles () {
+				this.$store.commit('showUserArticles', 0);
 			}
 		},
 		computed : {
@@ -189,7 +194,8 @@
 				userSignedUp: 'userSignedUp',
 				user: 'user',
 				error: 'error',
-				loading: 'loading'
+				loading: 'loading',
+				showUserArticles: 'showUserArticles'
 			})
 		},
 		watch: {

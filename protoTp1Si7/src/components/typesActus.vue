@@ -22,7 +22,7 @@
 		      	</v-btn>
 		     	<v-btn dark @click.native="setactiveTypeActus('actuFrance')">
 		        	<span>Actu France</span>
-		        	<v-icon>fiber_new</v-icon>
+		        	<v-icon>pin_drop</v-icon>
 		      	</v-btn>
 		      	<v-btn dark @click.native="setactiveTypeActus('actuMondiale')">
 		        	<span>Actu mondiale</span>
@@ -78,6 +78,7 @@
 		methods: {
 			setactiveTypeActus (typeActus) {
 				this.$store.commit('activeTypeActus', typeActus);
+				this.$store.commit('showUserArticles', 0);
 				if (this.activeNewspaper) this.$store.commit('activeNewspaper', undefined);
 				if (this.articles) this.$store.commit('articles', undefined);
 			}

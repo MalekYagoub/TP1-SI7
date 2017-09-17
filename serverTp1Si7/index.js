@@ -2,24 +2,31 @@ var express = require('express');
 var app = express();
 var cors = require('cors');
 var axios = require('axios');
-var feed = require("feed-read");
+// var feed = require("feed-read"); premiere version
+const feedparser = require('feedparser-promised');
+
 var port = 3000;
 
 app.use(cors());
 
 app.get('/getArticles/:newspapersType', function (req, res) {
 
-	function feedRss(url) {
+	/* function feedRss(url) { premiere version
 		feed(url, function(err, articles) {
 			if (err) throw err;
 			res.send(articles);
 		});
+	} */
+
+	function feedRss (url) {
+		var articles = [];
+		feedparser.parse(url).then( (items) => {
+			items.forEach(item => articles.push(item));
+			res.send(articles)
+		}).catch(error => console.error('error: ', error));
 	}
 
 	switch (req.params.newspapersType) {
-		case "all":
-			feedRss("http://www.lexpress.fr/rss/alaune.xml");
-			break;
 		case "actuFrancelexpress":
 			feedRss("http://www.lexpress.fr/rss/alaune.xml");
 			break;
