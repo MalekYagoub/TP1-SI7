@@ -1,5 +1,5 @@
 <template>
-	<v-flex xs3>
+	<v-flex xs12 sm2>
 		<app-alert  v-if="error" v-on:dismissed="onDismissed" :code="error.code"></app-alert>
 		<app-info  v-if="userSignedUp" v-on:dismissed="onDismissed" :info="'Compte crée avec succès !'"></app-info>
 		<v-card v-if="signUpOrSignIn === 0 && user === undefined && user == null">
@@ -42,7 +42,7 @@
 					</v-layout row wrap>
 				</form>
 
-				<p class="mt-3 title">Pas encore de compte, 
+				<p class="mt-3 title">Pas encore de compte, <br> 
 					<span class="secondary--text link" @click="showSignUpForm">
 						inscrivez vous !
 					</span>
@@ -126,7 +126,7 @@
 			<v-layout>
 				<v-flex xs6>
 						<v-btn class="primary black--text" large v-if="showUserArticles === 0" @click.native="showUserArticlesCommit">Mes articles</v-btn>
-						<v-btn class="primary black--text" large v-else-if="showUserArticles === 1" @click.native="showAllArticles">Tout les articles</v-btn>
+						<v-btn class="primary black--text" large v-else-if="showUserArticles === 1" @click.native="showAllArticles">Retour</v-btn>
 				</v-flex>
 				<v-flex xs6><v-btn class="primary black--text" type="submit" large @click="logout">Déconnexion</v-btn></v-flex>
 			</v-layout row wrap>
@@ -161,7 +161,7 @@
 				this.$store.dispatch('signUserIn', {email: this.email, password: this.password});
 			},
 			signUp () {
-				this.$store.dispatch('signUserUp', {email: this.email, password: this.password});
+				if (this.password === this.confirmPassword) this.$store.dispatch('signUserUp', {email: this.email, password: this.password});
 			},
 			showSignUpForm () {
 				this.signUpOrSignIn = 1;
@@ -188,7 +188,7 @@
 		},
 		computed : {
 			comparePasswords () {
-				return this.password !== this.confirmPassword ? "Mots de passes différents" : ""
+				return this.password !== this.confirmPassword ? "Mots de passes différents" : ''
 			},
 			...mapGetters({
 				userSignedUp: 'userSignedUp',

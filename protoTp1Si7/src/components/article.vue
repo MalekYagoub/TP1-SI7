@@ -1,7 +1,7 @@
 <template>
 	<v-flex xs12 ml-2 mr-2>
 		<v-card>
-			<v-card-media v-if="content.image" :src="content.image" height="200px">
+			<v-card-media v-if="content.image" :src="jpgImage" height="200px">
 			</v-card-media>
 			<v-card-title class="text-xs-center">
 				<div class="centerTitle">
@@ -15,10 +15,10 @@
 				<v-btn flat class="secondary--text" @click.native="goToNews(content.link)">
 					Lire
 				</v-btn>
-				<v-btn flat class="orange--text" v-if="user && !userIsRegistered" @click.native="registerForArticle(content)">
+				<v-btn flat class="green--text" v-if="user && !userIsRegistered" @click.native="registerForArticle(content)">
 					Favoris
 				</v-btn>
-				<v-btn v-if="content.userArticle === true" flat class="orange--text" @click.native="unRegisterFromArticle({guid: content.guid})">
+				<v-btn v-if="content.userArticle === true" flat class="red--text" @click.native="unRegisterFromArticle({guid: content.guid})">
 					Retirer des favoris
 				</v-btn>
 			</v-card-actions>
@@ -32,6 +32,14 @@
 		computed: {
 			user () {
 				return this.$store.state.user;
+			},
+			jpgImage () {
+				console.log(this.content.image);
+				if (/jpg/.test(this.content.image)) return this.content.image.substring(0, this.content.image.indexOf("jpg") + 3);
+				else if (/JPG/.test(this.content.image)) return this.content.image.substring(0, this.content.image.indexOf("JPG") + 3);
+				else if (/png/.test(this.content.image)) return this.content.image.substring(0, this.content.image.indexOf("png") + 3);
+				else return this.content.image.substring(0, this.content.image.indexOf("PNG") + 3);
+				
 			},
 			userIsRegistered () {
 				if (this.user.registeredArticles) {
@@ -67,6 +75,7 @@
 				}		
 			},
 			unRegisterFromArticle (guid) {
+				console.log(this.content.guid);
 				this.$store.dispatch('unregisterUserFromArticle', guid);
 			}
 		}

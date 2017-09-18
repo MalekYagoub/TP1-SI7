@@ -7,12 +7,12 @@
 		      :value="true"
 		      :active.sync="selected"
 		      :class="{
-		      	'yellow darken-4': selected === 0,
-		        'light-green accent-4': selected === 1,
-		        'deep-orange darken-4': selected === 2,
-		        'deep-purple accent-2': selected === 3,
-		        'brown lighten-1': selected === 4,
-		        'grey darken-4': selected === 5,
+		      	'deep-orange darken-2': selected === 0,
+		        'yellow darken-2': selected === 1,
+		        'light-green darken-2': selected === 2,
+		        'blue darken-2': selected === 3,
+		        'deep-purple darken-2': selected === 4,
+		        'grey darken-2': selected === 5,
 		      }"
 		      class="secondary"
 		    >

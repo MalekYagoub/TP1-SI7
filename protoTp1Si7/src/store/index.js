@@ -124,7 +124,8 @@ export default new Vuex.Store({
 								title: obj[key].title,
 								link: obj[key].link,
 								pubDate: obj[key].pubDate,
-								summary: obj[key].summary
+								summary: obj[key].summary,
+								guid: obj[key].guid
 							})
 						}	
 					}
