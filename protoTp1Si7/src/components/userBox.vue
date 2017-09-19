@@ -1,5 +1,5 @@
 <template>
-	<v-flex xs12 sm2>
+	<v-flex xs12 sm3>
 		<app-alert  v-if="error" v-on:dismissed="onDismissed" :code="error.code"></app-alert>
 		<app-info  v-if="userSignedUp" v-on:dismissed="onDismissed" :info="'Compte crée avec succès !'"></app-info>
 		<v-card v-if="signUpOrSignIn === 0 && user === undefined && user == null">
@@ -34,11 +34,11 @@
 
 					<v-layout>
 						<v-flex xs6>
-							<v-btn class="primary black--text" type="submit" large :disabled="loading" :loading="loading">
+							<v-btn class="primary black--text" type="submit" :disabled="loading" :loading="loading">
 								Connexion
 							</v-btn>
 						</v-flex>
-						<v-flex xs6><v-btn class="primary black--text" large @click="clear">Effacer</v-btn></v-flex>
+						<v-flex xs6><v-btn class="primary black--text" @click="clear">Effacer</v-btn></v-flex>
 					</v-layout row wrap>
 				</form>
 
@@ -98,11 +98,11 @@
 				
 					<v-layout>
 						<v-flex xs6>
-							<v-btn class="primary black--text" type="submit" large :disabled="loading" :loading="loading">
+							<v-btn class="primary black--text" type="submit" :disabled="loading" :loading="loading">
 								S'inscrire
 							</v-btn>
 						</v-flex>
-						<v-flex xs6><v-btn class="primary black--text" large @click="clear">Effacer</v-btn></v-flex>
+						<v-flex xs6><v-btn class="primary black--text" @click="clear">Effacer</v-btn></v-flex>
 					</v-layout row wrap>
 				</form>
 
@@ -115,7 +115,7 @@
 		</v-card>
 
 		<v-card v-if="user" class="pb-2">
-			<v-card-text class="px-0 headline">
+			<v-card-text class="px-0 title">
 				<v-container>
 					<span>Connecté avec</span>
 				</v-container>
@@ -125,10 +125,10 @@
 			</v-card-text>
 			<v-layout>
 				<v-flex xs6>
-						<v-btn class="primary black--text" large v-if="showUserArticles === 0" @click.native="showUserArticlesCommit">Mes articles</v-btn>
-						<v-btn class="primary black--text" large v-else-if="showUserArticles === 1" @click.native="showAllArticles">Retour</v-btn>
+						<v-btn class="primary black--text" v-if="showUserArticles === 0" @click.native="showUserArticlesCommit">Mes articles</v-btn>
+						<v-btn class="primary black--text" v-else-if="showUserArticles === 1" @click.native="showAllArticles">Retour</v-btn>
 				</v-flex>
-				<v-flex xs6><v-btn class="primary black--text" type="submit" large @click="logout">Déconnexion</v-btn></v-flex>
+				<v-flex xs6><v-btn class="primary black--text" type="submit" @click="logout">Déconnexion</v-btn></v-flex>
 			</v-layout row wrap>
 		</v-card>
 	</v-flex>

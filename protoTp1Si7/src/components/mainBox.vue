@@ -1,8 +1,8 @@
 <template>
-	<v-container grid-list-md text-xs-center>
-		<v-layout row wrap>
+	<v-container grid-list-md text-xs-center fluid>
+		<v-layout row wrap class="layoutBox">
 			<userBox></userBox>
-			<articlesBox></articlesBox>
+			<articlesBox ></articlesBox>
 		</v-layout>
 	</v-container>
 </template>
@@ -25,4 +25,10 @@
 </script>
 
 <style type="text/css">
+	.layoutBox {
+		height: 100%;
+		width: 100%;
+		padding-right: 8px;
+		position: absolute;
+	}
 </style>

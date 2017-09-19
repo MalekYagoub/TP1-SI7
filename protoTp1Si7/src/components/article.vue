@@ -1,5 +1,5 @@
 <template>
-	<v-flex xs12 ml-2 mr-2>
+	<v-flex xs12 mr-1 ml-1>
 		<v-card>
 			<v-card-media v-if="content.image" :src="jpgImage" height="200px">
 			</v-card-media>

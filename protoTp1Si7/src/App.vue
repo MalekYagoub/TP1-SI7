@@ -9,7 +9,7 @@
     <main>
       <router-view></router-view>
     </main>
-    <v-footer class="pa-3 grey lighten-1" fixed>
+    <v-footer class="pa-3 grey lighten-1 hidden-md-and-down" fixed>
       <v-spacer></v-spacer>
       <div>© {{ new Date().getFullYear() }}</div>
     </v-footer>
