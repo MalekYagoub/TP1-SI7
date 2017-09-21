@@ -36,6 +36,7 @@ export default new Vuex.Store({
 					user => {
 						commit('loading', false);
 						commit('userSignedUp', true);
+						payload.$router.push('/articles');
 					}
 				)
 				.catch(
@@ -61,6 +62,8 @@ export default new Vuex.Store({
 						}
 						commit('user', userSignedIn);
 						dispatch('fetchUserData');
+						console.log(payload);
+						payload.$router.push('/articles');
 					}
 				)
 				.catch(

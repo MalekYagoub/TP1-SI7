@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="fixedActus">
 		<v-card height="56px">
 		    <v-bottom-nav
 		      absolute
@@ -90,6 +90,11 @@
 				articles: 'articles'
 			})
 		},
+		mounted () {
+			this.$store.commit('activeTypeActus', null);
+			this.$store.commit('activeNewspaper', null);
+			this.$store.commit('articles', null);
+		},
 		data () {
 			return {
 				selected: undefined
@@ -104,5 +109,11 @@
 </script>
 
 <style type="text/css">
-	
+	/* .fixedActus {
+		z-index: 2;
+		overflow: auto;
+		position: fixed;
+    	/*top: 6.5%;
+   		width: 100%;
+	} */
 </style>
