@@ -3,7 +3,6 @@
 		<v-layout>
 			<v-flex xs12 sm6 offset-sm3>
 				<app-alert  v-if="error" v-on:dismissed="onDismissed" :code="error.code"></app-alert>
-				<app-info  v-if="userSignedUp" v-on:dismissed="onDismissed" :info="'Compte crée avec succès !'"></app-info>
 				<v-card class="mt-2">
 					<v-card-text>
 						<p class="text-xs-center headline">Inscription</p>

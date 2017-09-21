@@ -16,6 +16,7 @@
 			setActiveNewspaper(newspaper) {
 				this.$store.commit('activeNewspaper', newspaper);
 				this.$store.commit('showUserArticles', 0);
+				scroll(0,0);
 			}
 		},
 		computed: {
