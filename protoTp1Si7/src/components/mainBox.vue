@@ -1,8 +1,18 @@
 <template>
 	<v-container grid-list-md text-xs-center fluid>
 		<v-layout row wrap class="layoutBox">
-			<userBox></userBox>
-			<articlesBox ></articlesBox>
+			<userBox class="fixedUserBox"></userBox>
+			<articlesBox></articlesBox>
+			<v-btn @click.native="goTop"
+			  fixed
+              dark
+              fab
+              bottom
+              right
+              class="secondary"
+            >
+              <v-icon>keyboard_arrow_up</v-icon>
+            </v-btn>
 		</v-layout>
 	</v-container>
 </template>
@@ -20,15 +30,25 @@
 		components: {
 			'userBox': userBox,
 			'articlesBox': articlesBox
+		},
+		methods: {
+			goTop () {
+				scroll(0,0);
+			}
 		}
 	}
 </script>
 
 <style type="text/css">
-	.layoutBox {
-		height: 100%;
-		width: 100%;
-		padding-right: 8px;
-		position: absolute;
+	.fixedUserBox {
+		position: fixed;
+		left: 4%;
+	}
+
+	@media all and (max-width: 1275px) {
+		.fixedUserBox {
+			position: static;
+			width: 50%;
+		}
 	}
 </style>

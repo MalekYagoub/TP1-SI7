@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<typesActus></typesActus>
 		<mainBox></mainBox>
 	</div>
 </template>

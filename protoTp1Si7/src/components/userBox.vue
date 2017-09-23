@@ -1,5 +1,5 @@
 <template>
-	<v-flex xs12 sm3>
+	<v-flex xs12 sm8 offset-sm2 offset-lg0  mb-1>
 		<app-alert  v-if="error" v-on:dismissed="onDismissed" :code="error.code"></app-alert>
 		<app-info  v-if="userSignedUp" v-on:dismissed="onDismissed" :info="'Compte crée avec succès !'"></app-info>
 		<v-card v-if="signUpOrSignIn === 0 && user === undefined && user == null">
@@ -31,15 +31,16 @@
 				            ></v-text-field>
 						</v-layout>
 					</v-container>
-
-					<v-layout>
-						<v-flex xs6>
-							<v-btn class="primary black--text" type="submit" :disabled="loading" :loading="loading">
-								Connexion
-							</v-btn>
-						</v-flex>
-						<v-flex xs6><v-btn class="primary black--text" @click="clear">Effacer</v-btn></v-flex>
-					</v-layout row wrap>
+					<v-container>
+						<v-layout wrap>
+							<v-flex>
+								<v-btn class="primary black--text" type="submit" :disabled="loading" :loading="loading">
+									Connexion
+								</v-btn>
+							</v-flex>
+							<v-flex><v-btn class="primary black--text" @click="clear">Effacer</v-btn></v-flex>
+						</v-layout>
+					</v-container>
 				</form>
 
 				<p class="mt-3 title">Pas encore de compte, <br> 
@@ -95,15 +96,16 @@
 				            ></v-text-field>
 						</v-layout>
 					</v-container>
-				
-					<v-layout>
-						<v-flex xs6>
-							<v-btn class="primary black--text" type="submit" :disabled="loading" :loading="loading">
-								S'inscrire
-							</v-btn>
-						</v-flex>
-						<v-flex xs6><v-btn class="primary black--text" @click="clear">Effacer</v-btn></v-flex>
-					</v-layout row wrap>
+					<v-container>
+						<v-layout wrap>
+							<v-flex>
+								<v-btn class="primary black--text" type="submit" :disabled="loading" :loading="loading">
+									S'inscrire
+								</v-btn>
+							</v-flex>
+							<v-flex><v-btn class="primary black--text" @click="clear">Effacer</v-btn></v-flex>
+						</v-layout>
+					</v-container>
 				</form>
 
 				<v-card-actions class="white">
@@ -123,13 +125,15 @@
 					{{ user.email }}
 				</v-container>
 			</v-card-text>
-			<v-layout>
-				<v-flex xs6>
-						<v-btn class="primary black--text" v-if="showUserArticles === 0" @click.native="showUserArticlesCommit">Mes articles</v-btn>
-						<v-btn class="primary black--text" v-else-if="showUserArticles === 1" @click.native="showAllArticles">Retour</v-btn>
-				</v-flex>
-				<v-flex xs6><v-btn class="primary black--text" type="submit" @click="logout">Déconnexion</v-btn></v-flex>
-			</v-layout row wrap>
+			<v-container>
+				<v-layout wrap>
+					<v-flex>
+							<v-btn class="primary black--text" v-if="showUserArticles === 0" @click.native="showUserArticlesCommit">Mes articles</v-btn>
+							<v-btn class="primary black--text" v-else-if="showUserArticles === 1" @click.native="showAllArticles">Retour</v-btn>
+					</v-flex>
+					<v-flex><v-btn class="primary black--text" type="submit" @click="logout">Déconnexion</v-btn></v-flex>
+				</v-layout>
+			</v-container>
 		</v-card>
 	</v-flex>
 </template>
@@ -181,9 +185,11 @@
 			},
 			showUserArticlesCommit () {
 				this.$store.commit('showUserArticles', 1);
+				scroll(0,0);
 			},
 			showAllArticles () {
 				this.$store.commit('showUserArticles', 0);
+				scroll(0,0);
 			}
 		},
 		computed : {

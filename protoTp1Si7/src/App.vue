@@ -1,23 +1,29 @@
 <template>
   <v-app>
-    <v-toolbar class="primary">
-      <v-toolbar-title><img src="./assets/maPresse.png" class="logo"> <!--Ma presse --></v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-xs-only">
-      </v-toolbar-items>
-    </v-toolbar>
+    <header>
+      <v-toolbar class="primary">
+        <v-toolbar-title><img src="./assets/maPresse.png" class="logo"> <!--Ma presse --></v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-xs-only">
+        </v-toolbar-items>
+      </v-toolbar>
+      <typesActus></typesActus>
+    </header>
+    
     <main>
       <router-view></router-view>
     </main>
-    <v-footer class="pa-3 grey lighten-1 hidden-md-and-down" fixed>
-      <v-spacer></v-spacer>
-      <div>© {{ new Date().getFullYear() }}</div>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
+
+  import typesActus from './components/typesActus';
+
   export default {
+    components: {
+      typesActus
+    }
   }
 </script>
 
@@ -27,6 +33,16 @@
   img
     margin-top: 5px
 
-  body, *, html
-    overflow: hidden
+  header {
+    position: fixed;
+    top: 0;
+  }
+
+  main {
+    margin-top: 200px;
+  }
+
+  html {
+    background-color: #fafafa;
+  }
 </style>

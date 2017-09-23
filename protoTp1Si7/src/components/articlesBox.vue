@@ -1,6 +1,6 @@
 <template>
-	<v-flex xs12 sm9>
-		<v-card style="max-height: 73%" class="articleBoxScroll" v-if="showUserArticles === 0">
+	<v-flex xs12 lg9>
+		<v-card style="margin-bottom: 50px" class="articleBoxScroll" v-if="showUserArticles === 0">
 			<v-flex offset-xs3 xs6 v-if="articles">
 				<v-text-field
 					name="input-1-3"
@@ -93,11 +93,17 @@
 </script>
 
 <style type="text/css">
-	.articleBoxScroll {
-		overflow-y: auto;
-		max-height: 72%;
-	}
 	.centerTitle {
 		margin: auto;
+	}
+
+	.articleBoxScroll {
+		left: 32%;
+	}
+
+	@media all and (max-width: 1275px) {
+		.articleBoxScroll {
+			left: 0;
+		}
 	}
 </style>
