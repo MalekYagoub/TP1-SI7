@@ -73,10 +73,11 @@ export default new Vuex.Store({
 					}
 				)
 		},
-		logout ({commit}) {
+		logout ({commit}, payload) {
 			firebase.auth().signOut();
 			commit('user', undefined);
 			commit('showUserArticles', 0);
+			payload.$router.push('/articles');
 		},
 		registerUserForArticle ({commit, state, getters}, payload) {
 			const user = getters.user;

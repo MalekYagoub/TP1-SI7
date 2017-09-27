@@ -1,10 +1,10 @@
 <template>
-	<v-bottom-nav absolute :value="true" :active="activeNewspaper" class="transparent">
-		<v-btn v-for="newspaperInfos in newspapersInfos" :key="newspaperInfos.name" flat class="secondary--text" :value="newspaperInfos.value" 
-		@click.native="setActiveNewspaper(newspaperInfos.value)">
-			<span>{{newspaperInfos.name}}</span>
-		</v-btn>
-	</v-bottom-nav>
+		<v-bottom-nav absolute :value="true" :active="activeNewspaper" class="transparent horizontalBar">
+			<v-btn v-for="newspaperInfos in newspapersInfos" :key="newspaperInfos.name" flat class="secondary--text button-newspaper" :value="newspaperInfos.value" 
+			@click.native="setActiveNewspaper(newspaperInfos.value)">
+				<span>{{newspaperInfos.name}}</span>
+			</v-btn>
+		</v-bottom-nav>
 </template>
 
 <script type="text/javascript">
@@ -28,5 +28,11 @@
 </script>
 
 <style type="text/css">
-	
+	.horizontalBar {
+		overflow: auto;
+		overflow-y: hidden;
+		white-space: nowrap;
+		-webkit-overflow-scrolling: touch;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
+	}
 </style>

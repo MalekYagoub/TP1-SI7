@@ -50,10 +50,10 @@
 								</v-layout>
 								<v-layout row>
 									<v-flex xs12>
-										<v-btn class="primary black--text" type="submit" :disabled="loading" :loading="loading">
+										<v-btn class="primary" type="submit" :disabled="loading" :loading="loading">
 											S'inscrire
 										</v-btn>
-										<v-btn class="primary black--text" @click="clear">Effacer</v-btn>
+										<v-btn class="primary" @click="clear">Effacer</v-btn>
 									</v-flex>
 								</v-layout>
 							</form>

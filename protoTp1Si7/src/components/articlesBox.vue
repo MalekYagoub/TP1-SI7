@@ -34,7 +34,7 @@
 						v-model="query"
 					></v-text-field>
 				</v-flex>
-				<p class="headline mt-2" v-if="user.registeredArticles.length === 0">Vous n'avez pas encore d'articles favoris</p>
+				<p class="headline pt-3 pb-3 pr-1 pl-1" v-if="user.registeredArticles.length === 0">Vous n'avez pas encore d'articles favoris</p>
 				<v-layout v-for="article in computedListUser" :key="article.pubDate" mt-2>
 					<articleCmp  class="mb-1" v-if="article.image" :content="{pubDate: article.pubDate, title: article.title, summary: article.summary, image: article.image, link: article.link, guid: article.guid, userArticle: true}"></articleCmp>
 
@@ -42,6 +42,17 @@
 				</v-layout>
 			</v-card>
 		</v-flex>
+		<v-btn @click.native="goTop"
+			  fixed
+              dark
+              fab
+              bottom
+              right
+              class="secondary"
+              v-if="articles && $route.path == '/articles'"
+            >
+              <v-icon>keyboard_arrow_up</v-icon>
+            </v-btn>
 	</v-container>
 </template>
 
@@ -53,6 +64,11 @@
 	export default {
 		components: {
 			articleCmp
+		},
+		methods: {
+			goTop () {
+				scroll(0,0);
+			}
 		},
 		props: ['isUserArticles'],
 		data () {
@@ -96,10 +112,6 @@
 </script>
 
 <style type="text/css">
-	.articleBoxScroll {
-		/*overflow-y: auto;*/
-		/*max-height: 72%;*/
-	}
 	.centerTitle {
 		margin: auto;
 	}

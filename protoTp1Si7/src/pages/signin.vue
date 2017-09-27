@@ -1,5 +1,5 @@
 <template>
-	<signinBox></signinBox>
+	<signinBox style="height=544px"></signinBox>
 </template>
 
 <script type="text/javascript">
@@ -12,3 +12,6 @@
 		}
 	}
 </script>
+
+<style type="text/css">
+</style>

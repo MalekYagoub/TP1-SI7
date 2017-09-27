@@ -1,9 +1,8 @@
 <template>
-	<div class="fixedActus">
-		<v-card height="56px">
+	<div>
+		<v-card height="56px" class="">
 		    <v-bottom-nav
 		      absolute
-		      shift
 		      :value="true"
 		      :active.sync="selected"
 		      :class="{
@@ -14,7 +13,7 @@
 		        'deep-purple darken-2': selected === 4,
 		        'grey darken-2': selected === 5,
 		      }"
-		      class="secondary"
+		      class="secondary typeActus"
 		    >
 		        <v-btn dark @click.native="setactiveTypeActus('economie')">
 		        	<span>Economie</span>
@@ -26,11 +25,11 @@
 		      	</v-btn>
 		      	<v-btn dark @click.native="setactiveTypeActus('actuMondiale')">
 		        	<span>Actu mondiale</span>
-		        	<v-icon>airplanemode_active</v-icon>
+		        	<v-icon>public</v-icon>
 		      	</v-btn>
 		      	<v-btn dark @click.native="setactiveTypeActus('sport')">
 		        	<span>Sport</span>
-		        	<v-icon>directions_bike</v-icon>
+		        	<img src="../assets/soccer.png"></img>
 		      	</v-btn>
 		      	<v-btn dark @click.native="setactiveTypeActus('technologie')">
 		        	<span>Technologie</span>
@@ -42,7 +41,7 @@
 		    	</v-btn>
 		    </v-bottom-nav>
 		</v-card>
-		<v-card height="56px" class="mb-4">
+		<v-card height="56px" class="mb-4 newspaperNav">
 			<newspaperNav v-show="activeTypeActus === 'economie'" 
 			:newspapersInfos="[{value: 'leMonde', name: 'Le Monde'}, {value: 'leFigaro', name: 'Le Figaro'}, {value: 'laCroix', name: 'La Croix'}, {value: 'leParisien', name: 'Le Parisien'}, {value: 'leTelegramme', name: 'Le Télégramme'}]"/>
 			</newspaperNav>
@@ -109,11 +108,8 @@
 </script>
 
 <style type="text/css">
-	/* .fixedActus {
-		z-index: 2;
-		overflow: auto;
-		position: fixed;
-    	/*top: 6.5%;
-   		width: 100%;
-	} */
+
+	.newspaperNav {
+	}
+
 </style>

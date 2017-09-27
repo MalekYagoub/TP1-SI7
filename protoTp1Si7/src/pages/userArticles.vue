@@ -1,5 +1,5 @@
 <template>
-	<div class="layoutBox">
+	<div>
 		<v-container grid-list-md text-xs-center fluid class="layoutBox">
 			<v-layout row wrap class="layoutBox">
 				<articlesBox></articlesBox>
@@ -24,9 +24,4 @@
 </script>
 
 <style type="text/css">
-	.layoutBox {
-	    height: 100%;
-	    width: 100%;
-	    position: absolute;
-	}
 </style>

@@ -40,7 +40,7 @@
             <v-list-tile-title>Inscription</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile v-if="$store.getters.user" @click="$store.dispatch('logout')">
+        <v-list-tile v-if="$store.getters.user" @click="$store.dispatch('logout', {$router: $router})">
           <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>
           </v-list-tile-action>
@@ -54,29 +54,29 @@
 
     <header>
       <v-toolbar class="primary">
-        <v-toolbar-side-icon @click.native.stop="sideNav = !sideNav" class="hidden-sm-and-up"></v-toolbar-side-icon>
-        <v-toolbar-title><img src="./assets/maPresse.png" class="logo"> <!--Ma presse --></v-toolbar-title>
+        <v-toolbar-side-icon dark @click.native.stop="sideNav = !sideNav" class="hidden-sm-and-up"></v-toolbar-side-icon>
+        <v-toolbar-title class="white--text">Ma presse</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-xs-only">
-          <v-btn flat router to="/articles">
+          <v-btn flat dark router to="/articles">
             <v-icon left>new_releases</v-icon>
-            Articles
+            <span class="white--text">Articles</span>
           </v-btn>
-          <v-btn flat router v-if="$store.getters.user"  @click.native="goUserArticles">
+          <v-btn flat dark router v-if="$store.getters.user"  @click.native="goUserArticles">
             <v-icon left>star</v-icon>
-            Mes articles
+            <span class="white--text">Mes articles</span>
           </v-btn>
-          <v-btn flat router v-if="!$store.getters.user" to="/signin">
+          <v-btn flat dark router v-if="!$store.getters.user" to="/signin">
             <v-icon left>face</v-icon>
-            Connexion
+            <span class="white--text">Connexion</span>
           </v-btn>
-          <v-btn flat router v-if="!$store.getters.user" to="/signup">
+          <v-btn flat dark router v-if="!$store.getters.user" to="/signup">
             <v-icon left>lock_open</v-icon>
-            Inscription
+            <span class="white--text">Inscription</span>
           </v-btn>
-          <v-btn flat router v-if="$store.getters.user" @click.native="$store.dispatch('logout');">
+          <v-btn flat dark router v-if="$store.getters.user" @click.native="$store.dispatch('logout', {$router: $router});">
             <v-icon left>exit_to_app</v-icon>
-            Déconnexion
+            <span class="white--text">Déconnexion</span>
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
